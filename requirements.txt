@@ -5,6 +5,9 @@
 # Gradio UI Framework
 gradio==4.44.0
 
+# HuggingFace Hub (pinned for Gradio 4.44.0 compatibility)
+huggingface_hub<0.20.0
+
 # HTTP Client (for calling backend API)
 httpx==0.27.2
 requests==2.32.3
