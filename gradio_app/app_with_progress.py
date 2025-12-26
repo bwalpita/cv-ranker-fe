@@ -1250,7 +1250,6 @@ def create_interface():
                     # Error message display
                     validation_error = gr.Textbox(
                         label="Validation Status",
-                        interactive=False,
                         lines=2,
                         value="✅ Ready"
                     )
@@ -1279,7 +1278,6 @@ def create_interface():
                     gr.Markdown("### ⏳ Processing Status")
                     status_text = gr.Textbox(
                         label="Status",
-                        interactive=False,
                         lines=1,
                         value="Ready to analyze",
                         scale=2
