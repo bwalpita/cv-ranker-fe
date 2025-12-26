@@ -1504,19 +1504,6 @@ if __name__ == "__main__":
     if os.environ.get("GRADIO_SERVER_PORT") == "$PORT":
         del os.environ["GRADIO_SERVER_PORT"]
     
-    # MONKEY PATCH: Fix Gradio 4.44.0 schema generation bug
-    # The bug occurs when State components contain dicts with bool values
-    from gradio_client import utils as client_utils
-    original_get_type = client_utils.get_type
-    
-    def patched_get_type(schema):
-        """Wrapper that handles bool schemas gracefully"""
-        if isinstance(schema, bool):
-            return "bool"
-        return original_get_type(schema)
-    
-    client_utils.get_type = patched_get_type
-    
     print("🚀 Starting CV Ranking Gradio Interface...")
     print(f"📍 API URL: {API_URL}")
     
