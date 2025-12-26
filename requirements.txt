@@ -2,8 +2,8 @@
 # Frontend UI - Core Dependencies
 # ========================================
 
-# Gradio UI Framework (4.36.1 - stable version without schema issues)
-gradio==4.36.1
+# Gradio UI Framework (4.32.0 - very stable, no schema validation issues)
+gradio==4.32.0
 
 # HuggingFace Hub (pinned for Gradio 4.44.0 compatibility)
 huggingface_hub<0.20.0

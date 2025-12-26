@@ -1513,6 +1513,10 @@ if __name__ == "__main__":
     
     print(f"🌐 Server: {server_name}:{port}")
     
+    # CRITICAL: Disable API docs to prevent schema generation errors with Gradio 4.36.1
+    import os
+    os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+    
     demo.launch(
         server_name=server_name,
         server_port=port,
@@ -1521,5 +1525,6 @@ if __name__ == "__main__":
         debug=False,  # Disable debug mode
         show_api=False,  # Disable API docs to avoid schema generation
         inbrowser=False,  # Don't try to open browser
-        prevent_thread_lock=False  # Let Gradio block on this thread
+        prevent_thread_lock=False,  # Let Gradio block on this thread
+        api_open=False  # Additional API protection
     )
