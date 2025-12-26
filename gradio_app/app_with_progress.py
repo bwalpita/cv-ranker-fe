@@ -236,8 +236,9 @@ def call_flowise_evaluation(candidate_name: str, candidate_email: str, candidate
             print("❌ Candidate name is required for Flowise evaluation")
             return {'error': 'Candidate name is required', 'success': False}
         
-        # Use the new proper endpoint that builds query correctly
-        flowise_url = "http://127.0.0.1:8000/flowise/evaluate-candidate"
+        # Use the backend API URL (from environment or default to localhost for development)
+        # Replace /rank/enhanced with /flowise/evaluate-candidate
+        flowise_url = API_URL.replace("/rank/enhanced", "/flowise/evaluate-candidate")
         
         payload = {
             "candidate_name": candidate_name.strip(),
@@ -1513,17 +1514,33 @@ if __name__ == "__main__":
     
     print(f"🌐 Server: {server_name}:{port}")
     
-    # CRITICAL: Disable API docs to prevent schema generation errors with Gradio 4.32.0
+    # CRITICAL: Disable API docs to prevent schema generation errors with Gradio
     import os
     os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+    os.environ["GRADIO_SERVER_API_DOCS"] = "false"
     
-    demo.launch(
-        server_name=server_name,
-        server_port=port,
-        share=False,  # Don't create public Gradio share link
-        show_error=True,
-        debug=False,  # Disable debug mode
-        show_api=False,  # Disable API docs to avoid schema generation
-        inbrowser=False,  # Don't try to open browser
-        prevent_thread_lock=False  # Let Gradio block on this thread
-    )
+    try:
+        demo.launch(
+            server_name=server_name,
+            server_port=port,
+            share=False,  # Don't create public Gradio share link
+            show_error=True,
+            debug=False,  # Disable debug mode
+            show_api=False,  # Disable API docs to avoid schema generation
+            inbrowser=False,  # Don't try to open browser
+            prevent_thread_lock=False  # Let Gradio block on this thread
+        )
+    except Exception as e:
+        print(f"⚠️ Launch error (continuing anyway): {str(e)}")
+        # If launch fails, try without schema generation
+        demo.launch(
+            server_name=server_name,
+            server_port=port,
+            share=False,
+            show_error=False,
+            debug=False,
+            show_api=False,
+            inbrowser=False,
+            analytics_enabled=False,
+            prevent_thread_lock=False
+        )
