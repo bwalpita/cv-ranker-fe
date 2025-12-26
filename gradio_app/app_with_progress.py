@@ -1504,9 +1504,15 @@ if __name__ == "__main__":
     
     demo = create_interface()
     
+    # Get port from environment (Railway sets this) or default to 7860
+    port = int(os.environ.get("PORT", 7860))
+    server_name = os.environ.get("GRADIO_SERVER_NAME", "0.0.0.0")
+    
+    print(f"🌐 Server: {server_name}:{port}")
+    
     demo.launch(
-        server_name="127.0.0.1",
-        server_port=7860,
+        server_name=server_name,
+        server_port=port,
         share=False,
         show_error=True,
         debug=True
