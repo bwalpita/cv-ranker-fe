@@ -30,6 +30,18 @@ from pathlib import Path
 from datetime import datetime
 from typing import Tuple, Dict, Any, Optional
 
+# CRITICAL: Disable API schema generation to prevent "bool is not iterable" error
+# Monkey-patch Gradio's get_api_info to prevent schema generation
+try:
+    from gradio import blocks
+    original_get_api_info = blocks.Blocks.get_api_info
+    def patched_get_api_info(self):
+        # Return minimal API info to prevent schema generation errors
+        return {"info": "API disabled to prevent schema validation errors"}
+    blocks.Blocks.get_api_info = patched_get_api_info
+except:
+    pass
+
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
