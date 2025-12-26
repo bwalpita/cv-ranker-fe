@@ -1504,6 +1504,19 @@ if __name__ == "__main__":
     if os.environ.get("GRADIO_SERVER_PORT") == "$PORT":
         del os.environ["GRADIO_SERVER_PORT"]
     
+    # MONKEY PATCH: Fix Gradio 4.44.0 schema generation bug
+    # The bug occurs when State components contain dicts with bool values
+    from gradio_client import utils as client_utils
+    original_get_type = client_utils.get_type
+    
+    def patched_get_type(schema):
+        """Wrapper that handles bool schemas gracefully"""
+        if isinstance(schema, bool):
+            return "bool"
+        return original_get_type(schema)
+    
+    client_utils.get_type = patched_get_type
+    
     print("🚀 Starting CV Ranking Gradio Interface...")
     print(f"📍 API URL: {API_URL}")
     
@@ -1518,8 +1531,10 @@ if __name__ == "__main__":
     demo.launch(
         server_name=server_name,
         server_port=port,
-        share=False,
+        share=False,  # Don't create public Gradio share link
         show_error=True,
-        debug=False,  # Disable debug to avoid API schema generation issues
-        show_api=False  # Disable API docs - fixes schema validation error
+        debug=False,  # Disable debug mode
+        show_api=False,  # Disable API docs to avoid schema generation
+        inbrowser=False,  # Don't try to open browser
+        prevent_thread_lock=False  # Let Gradio block on this thread
     )
