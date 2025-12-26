@@ -1499,6 +1499,11 @@ Use this to:
 # ============================================================================
 
 if __name__ == "__main__":
+    # CRITICAL FIX: Railway may set GRADIO_SERVER_PORT to "$PORT" literal
+    # This breaks Gradio's internal port detection. Unset it and use PORT directly.
+    if os.environ.get("GRADIO_SERVER_PORT") == "$PORT":
+        del os.environ["GRADIO_SERVER_PORT"]
+    
     print("🚀 Starting CV Ranking Gradio Interface...")
     print(f"📍 API URL: {API_URL}")
     
