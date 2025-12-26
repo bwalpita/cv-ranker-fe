@@ -1292,17 +1292,17 @@ def create_interface():
                 with gr.Column(scale=1):
                     gr.Markdown("# CV Ranking Results")
                     
-                    with gr.Accordion("✅ Baseline Ranking", open=True):
+                    with gr.Accordion("✅ Baseline Ranking"):
                         baseline_output = gr.Markdown("Waiting for results...")
                     
-                    with gr.Accordion("🔬 Social-Weighted Results (Option B)", open=True):
+                    with gr.Accordion("🔬 Social-Weighted Results (Option B)"):
                         social_output = gr.Markdown("Social weighting will appear here if social links were provided...")
                     
-                    with gr.Accordion("📈 Impact Analysis", open=True):
+                    with gr.Accordion("📈 Impact Analysis"):
                         delta_output = gr.Markdown("")
                     gr.Markdown("---")
                     
-                    with gr.Accordion("🔗 Flowise Integration Output", open=False):
+                    with gr.Accordion("🔗 Flowise Integration Output"):
                         gr.Markdown("""
 **This section displays data sent to and responses received from Flowise chatflows.**
 
