@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profile - {candidate_name}</title>
+    <style>
+        * {{
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }}
+        
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            background-color: #f8fafc !important;
+            color: #1e293b !important;
+            padding: 20px !important;
+            line-height: 1.6 !important;
+        }}
+        
+        .container {{
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            background-color: #ffffff !important;
+            border-radius: 12px !important;
+            padding: 30px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        }}
+        
+        header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-radius: 12px !important;
+            padding: 30px !important;
+            margin-bottom: 30px !important;
+            color: #ffffff !important;
+        }}
+        
+        h1, h2, h3, .candidate-info h2 {{
+            color: #ffffff !important;
+        }}
+        
+        .subtitle, .candidate-info p {{
+            color: rgba(255, 255, 255, 0.95) !important;
+        }}
+        
+        .candidate-header {{
+            display: flex !important;
+            align-items: center !important;
+            gap: 20px !important;
+            margin-top: 20px !important;
+        }}
+        
+        .avatar {{
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 2em !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            flex-shrink: 0 !important;
+        }}
+        
+        .section {{
+            background-color: #ffffff !important;
+            border-radius: 12px !important;
+            padding: 30px !important;
+            margin-bottom: 20px !important;
+            margin-top: 20px !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+            border-left: 4px solid #3b82f6 !important;
+        }}
+        
+        .section h2 {{
+            color: #1e293b !important;
+            margin-bottom: 20px !important;
+            padding-bottom: 12px !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+            font-size: 1.5em !important;
+            font-weight: 700 !important;
+        }}
+        
+        .section p {{
+            color: #475569 !important;
+            line-height: 1.8 !important;
+            margin-bottom: 15px !important;
+        }}
+        
+        .info-table {{
+            width: 100% !important;
+            border-collapse: collapse !important;
+            background-color: #ffffff !important;
+        }}
+        
+        .info-table tr {{
+            border-bottom: 1px solid #e2e8f0 !important;
+        }}
+        
+        .info-table td {{
+            padding: 14px 12px !important;
+            font-size: 0.95em !important;
+            color: #334155 !important;
+            background-color: transparent !important;
+        }}
+        
+        .info-table td:first-child {{
+            font-weight: 700 !important;
+            color: #1e293b !important;
+            width: 150px !important;
+            background-color: #f1f5f9 !important;
+        }}
+        
+        .status-grid {{
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+            gap: 20px !important;
+            margin-top: 20px !important;
+        }}
+        
+        .status-card {{
+            padding: 22px !important;
+            border-radius: 12px !important;
+            border: 2px solid #3b82f6 !important;
+            text-align: center !important;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%) !important;
+        }}
+        
+        .status-icon {{
+            font-size: 2.5em !important;
+            margin-bottom: 12px !important;
+        }}
+        
+        .status-label {{
+            font-weight: 700 !important;
+            color: #1e293b !important;
+            margin-bottom: 8px !important;
+            font-size: 1.05em !important;
+        }}
+        
+        .behavior-score {{
+            font-size: 2.5em !important;
+            font-weight: 700 !important;
+            color: #2563eb !important;
+            margin: 10px 0 !important;
+        }}
+        
+        .behavior-label {{
+            font-size: 0.85em !important;
+            color: #64748b !important;
+            font-style: italic !important;
+            margin-top: 8px !important;
+        }}
+        
+        .interpretation-box {{
+            background-color: #f0f9ff !important;
+            padding: 18px !important;
+            border-radius: 8px !important;
+            border-left: 4px solid #3b82f6 !important;
+            margin-top: 15px !important;
+            color: #475569 !important;
+            font-size: 0.9em !important;
+            line-height: 1.7 !important;
+        }}
+        
+        .interpretation-box strong {{
+            color: #1e293b !important;
+            display: block !important;
+            margin-bottom: 10px !important;
+        }}
+        
+        .profile-header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: #ffffff !important;
+            padding: 20px !important;
+            border-radius: 10px !important;
+            margin-bottom: 20px !important;
+        }}
+        
+        .profile-header h2 {{
+            color: #ffffff !important;
+            border: none !important;
+            padding: 0 !important;
+        }}
+        
+        .profile-header p, .profile-header div {{
+            color: #ffffff !important;
+        }}
+        
+        a {{
+            color: #2563eb !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }}
+        
+        /* UNIVERSAL FIXES - Force colors on ALL elements */
+        .section div, .section span, .section td, .section th {{
+            color: #1e293b !important;
+        }}
+        
+        .section div[style*="background"] {{
+            color: #1e293b !important;
+        }}
+        
+        /* Force white backgrounds on all nested divs in sections */
+        .section > div {{
+            background-color: transparent !important;
+        }}
+        
+        /* Posts and dynamic content */
+        .post-card, .card {{
+            background-color: #f8fafc !important;
+            color: #1e293b !important;
+        }}
+        
+        .post-card *, .card * {{
+            color: #334155 !important;
+        }}
+        
+        /* Tables inside sections */
+        .section table {{
+            background-color: #ffffff !important;
+        }}
+        
+        .section table td, .section table th {{
+            color: #334155 !important;
+            background-color: transparent !important;
+        }}
+        
+        .section table tr:nth-child(odd) td {{
+            background-color: #f1f5f9 !important;
+        }}
+        
+        /* Text in any div */
+        div[style*="color"] {{
+            color: inherit !important;
+        }}
+        
+        /* Ensure section headings are always dark */
+        .section h3 {{
+            color: #1e293b !important;
+        }}
+        
+        /* Profile headers with gradients - force white text */
+        div[style*="linear-gradient"] {{
+            color: #ffffff !important;
+        }}
+        
+        div[style*="linear-gradient"] * {{
+            color: #ffffff !important;
+        }}
+        
+        div[style*="linear-gradient"] h2,
+        div[style*="linear-gradient"] h3,
+        div[style*="linear-gradient"] p,
+        div[style*="linear-gradient"] div,
+        div[style*="linear-gradient"] span {{
+            color: #ffffff !important;
+        }}
+        
+        /* WhatsApp verification - green bg needs white text */
+        div[style*="#25D366"] {{
+            color: #ffffff !important;
+        }}
+        
+        div[style*="#25D366"] * {{
+            color: #ffffff !important;
+        }}
+        
+        /* GitHub/Card sections */
+        .section .card {{
+            background-color: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+        }}
+        
+        .section .card * {{
+            color: #334155 !important;
+        }}
+        
+        /* Social profiles box */
+        .section div[style*="border-left: 4px"] {{
+            background-color: #f0f9ff !important;
+        }}
+        
+        .section div[style*="border-left: 4px"] * {{
+            color: #1e293b !important;
+        }}
+        
+        /* Interpretation boxes */
+        .interpretation-box div {{
+            color: #475569 !important;
+        }}
+        
+        /* Behavioral analysis tables */
+        .info-table tr {{
+            background-color: transparent !important;
+        }}
+        
+        /* Post cards */
+        div[class*="post"] {{
+            background-color: #f8fafc !important;
+            color: #334155 !important;
+        }}
+        
+        div[class*="post"] * {{
+            color: #334155 !important;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Candidate Evaluation Report</h1>
+            <div class="subtitle">Comprehensive CV Ranking & Social Validation Results</div>
+            <div class="candidate-header">
+                <div class="avatar">{initials}</div>
+                <div class="candidate-info">
+                    <h2>{candidate_name}</h2>
+                    {email_html}
+                    {phone_html}
+                    <p style="margin-top: 12px !important;"><strong>CV Match Score:</strong> <span style="font-size: 1.4em !important; font-weight: 700 !important;">{match_score}%</span></p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2>📋 Contact Information</h2>
+            <table class="info-table">
+                <tr><td>Name</td><td>{candidate_name_display}</td></tr>
+                <tr><td>Email</td><td>{candidate_email_display}</td></tr>
+                <tr><td>Phone</td><td>{candidate_phone_display}</td></tr>
+                <tr><td>CV Match Score</td><td><strong style="font-size: 1.1em !important; color: #2563eb !important;">{match_score}%</strong></td></tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Social Media Behavior Assessment</h2>
+            <p>Detailed analysis of candidate's social media presence and engagement patterns</p>
+            {professional_summary_html}
+            {facebook_profile_html}
+            {whatsapp_verification_html}
+            {github_profile_html}
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-icon">💼</div>
+                    <div class="status-label">LinkedIn Presence</div>
+                    <div class="behavior-score">{linkedin_score:.0f}%</div>
+                    <div class="behavior-label">Status: {linkedin_label}</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">👥</div>
+                    <div class="status-label">Facebook Activity</div>
+                    <div class="behavior-score">{facebook_score:.0f}%</div>
+                    <div class="behavior-label">Status: {facebook_label}</div>
+                </div>
+            </div>
+            {recent_linkedin_posts_html}
+            {recent_facebook_posts_html}
+            <div style="margin-top: 25px !important; padding: 15px !important; background-color: #f0f9ff !important; border-radius: 8px !important; border-left: 4px solid #3b82f6 !important;">
+                <h3 style="margin: 0 0 12px 0 !important; color: #1e293b !important;">🔗 Social Media Profiles</h3>
+                <div style="display: grid !important; gap: 10px !important;">{social_profiles_html}</div>
+            </div>
+            <div class="interpretation-box">
+                <strong>📌 Score Interpretation Guide</strong>
+                <div style="margin-top: 8px !important; color: #475569 !important;">
+                    • <strong>LinkedIn Score (0-100%):</strong> Professional activity level<br/>
+                    • <strong>Facebook Score (0-100%):</strong> Casual social engagement<br/>
+                    • <strong>Labels:</strong> Behavior categories<br/>
+                    • <strong>Combined:</strong> Holistic social media footprint
+                </div>
+            </div>
+        </div>
+        
+        {linkedin_breakdown_html}
+        {facebook_breakdown_html}
+        
+        <div class="section">
+            <h2>🔍 Verification Status</h2>
+            <div class="status-grid">{verification_status_html}</div>
+        </div>
+        
+        <div class="section">
+            <h2>🧠 SHAP Analysis & Feature Importance</h2>
+            <p><strong>Top contributing factors for CV ranking decision</strong></p>
+            <div class="interpretation-box" style="background-color: #fef2f2 !important; border-left-color: #ef4444 !important;">
+                <strong style="color: #1e293b !important;">📖 Understanding SHAP Values</strong>
+                <div style="margin-top: 12px !important; line-height: 1.9 !important; color: #475569 !important;">
+                    • <strong>What are SHAP values?</strong> Features that influenced the ranking<br/>
+                    • <strong>Positive (↑):</strong> Increased match score<br/>
+                    • <strong>Negative (↓):</strong> Decreased match score<br/>
+                    • <strong>Magnitude:</strong> Stronger impact = larger numbers
+                </div>
+            </div>
+            <div style="background-color: #fef2f2 !important; padding: 25px !important; border-radius: 12px !important; border: 3px solid #ef4444 !important; margin-top: 20px !important;">
+                <div style="font-weight: 700 !important; color: #dc2626 !important; margin-bottom: 15px !important; font-size: 1.2em !important;">📌 Detailed Feature Analysis</div>
+                <div style="background-color: #ffffff !important; padding: 18px !important; border-radius: 8px !important; border: 1px solid #fecaca !important; white-space: pre-wrap !important; word-break: break-word !important; font-family: 'Courier New', monospace !important; font-size: 0.95em !important; color: #334155 !important; line-height: 1.7 !important; max-height: 800px !important; overflow-y: auto !important;">{shap_explanation}</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🚀 Next Steps</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-icon">📧</div>
+                    <div class="status-label">Email Verification</div>
+                    <div class="behavior-label">Send link</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">💬</div>
+                    <div class="status-label">SMS/WhatsApp</div>
+                    <div class="behavior-label">Send code</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">🔗</div>
+                    <div class="status-label">Social Validation</div>
+                    <div class="behavior-label">Verify profiles</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">💾</div>
+                    <div class="status-label">Archive Record</div>
+                    <div class="behavior-label">Save to database</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

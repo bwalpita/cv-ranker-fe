@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Environment
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Data
+data_storage/*
+!data_storage/.gitkeep
+exports/*
+!exports/.gitkeep
