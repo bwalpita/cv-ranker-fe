@@ -1520,5 +1520,6 @@ if __name__ == "__main__":
         server_port=port,
         share=False,
         show_error=True,
-        debug=True
+        debug=False,  # Disable debug to avoid API schema generation issues
+        show_api=False  # Disable API docs - fixes schema validation error
     )
